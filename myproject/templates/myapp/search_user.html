@@ -1,0 +1,25 @@
+ {% extends "myapp/base.html" %} {% load static %} {% block content %} {% block title %}
+<title>search</title>{% endblock title%}
+<div class="col-sm-8">
+    <h3 class="text-white my-5">search</h3>
+    {% if messages %} {% for message in messages %}
+    <h4 {% if message.tags %} class="alert alert-{{message.tags}} mb-5" {% endif %}>{{message}}</h4>
+    {% endfor %} {% endif %}
+    {% if perms.blog.search_view %}
+    {% if users %}
+    {% for user in users %}
+    <p>User name : {{user.username}}</p>
+    <p>User first name : {{user.first_name}}</p>
+    <p>User last name : {{user.last_name}}</p>
+    <p>User email id : {{user.email}}</p>
+    <p>Is super user : {{user.is_superuser}}</p>
+    <p>User lost login date and time : {{user.last_login}}</p>
+    {% endfor %}
+    {% endif %}
+    {% endif %}
+  
+   
+</div>
+
+{% endblock content %}
+ 

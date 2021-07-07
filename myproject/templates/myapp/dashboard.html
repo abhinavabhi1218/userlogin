@@ -1,0 +1,55 @@
+{% extends "myapp/base.html" %} {% load static %} {% block content %}
+<div class="col-sm-2">
+    <h4 class="text-white my-5">Profile</h4>
+    {% if full_name %}
+    <h5>{{full_name}}</h5>{% endif %} {% for group in groups %}
+    <p>{{group.name}}</p>
+    {% endfor %}
+    <a class='btn btn-success btn-bg text-white' href="{% url 'addpost' %}" rel="noopener noreferrer">Add post</a><br><br>
+</div>
+<div class="col-sm-8">
+    <h3 class="text-white my-5">Dashboard</h3>
+    {% if messages %} {% for message in messages %}
+    <h4 {% if message.tags %} class="alert alert-{{message.tags}} mb-5" {% endif %}>{{message}}</h4>
+    {% endfor %} {% endif %}
+     {% if perms.blog.search_view %}
+    <form action="{% url 'searched' %}" method="post">
+    {% csrf_token %}
+
+        <object align=right>
+        <div class="form-inline">
+            <button class='btn btn-success' type="submit">search</button>
+            <input type="text" name='search' id='search' class="form-control">
+        </div>
+        </object>
+
+
+    </form>
+    {% endif %}
+</div>
+<table class="table table-hover ">
+    <thead class="thead-light">
+        <tr class=" text-center">
+            <th scope="col" style="width:20%">Title</th>
+            <th scope="col" style="width:65%">Description</th>
+            <th scope='col' style="width:15%">Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% if posts %} {% for post in posts %}
+        <tr>
+            <td class="text-white">{{post.title}}</td>
+            <td>{{post.desc}}</td>
+            <td>
+                <a href="{% url 'update' post.id %}" rel="noopener noreferrer" , class=" btn btn-warning btn-sm text-white">Edit</a> {% if perms.blog.delete_post %}
+                <form action="{% url 'delete' post.id %}" method="post" class='d-inline'>{% csrf_token %}
+                    <input type="submit" class="btn btn-danger btn-sm" value='Delete'>
+
+                </form>
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %} {% endif %}
+    </tbody>
+</table>
+{% endblock content %}
