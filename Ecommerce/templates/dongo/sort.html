@@ -1,0 +1,52 @@
+{% extends "dongo/navbar.html" %} {% load static%} {% block title %}
+<title>homepage</title>{% endblock title %} {% block content %}
+<link rel="stylesheet" href="{% static 'dongo/style.css' %}">
+
+<body>
+    <div class="container">
+        <div class="row">
+            {% for product in products %}
+            <div class="col-sm-3 ">
+                <div class="card ">
+                    <div>
+                        {% if request.user.is_superuser %}
+                        <a href="{% url 'delete' product.id %}" class="link"><span class="glyphicon glyphicon-trash"></span></a>&nbsp;&nbsp;
+                        <a href="{% url 'update' product.id %}" class="link"><span class="glyphicon glyphicon-pencil" style="float:right;"></span></a> {% endif %}</div>
+                    <a href="{% url 'product' product.id %}"><img src="{{product.image}} " class="card-img-top " alt=" "></a>
+                    <div class="card-body ">
+                        <div class="card-title ">
+                            <a href="{% url 'product' product.id %}" class="li"> {{product.title.capitalize}}</a>
+                        </div>
+                        <div class="card-text ">
+                            <span class="glyphicon glyphicon-usd"></span>{{product.price}}
+                            <br><span class="glyphicon glyphicon-star" style="color:goldenrod"></span>{{product.rating}}</div>
+
+                    </div>
+                </div><br>
+            </div>
+            {% endfor %}
+        </div>
+        <dvi class="row">
+            <div class="col-md-3 offset-md-4">
+            <nav aria-label="...">
+                <ul class="pagination">
+                {% if products.has_previous %}
+                    <li class="page-item ">
+                    <a class="page-link" href="?page={{ products.previous_page_number }}" tabindex="-1">Previous</a>
+                    </li>
+                    {% endif %}
+                    <li class="page-item "><a class="page-link" href="?page={{ products.number }}">current</a>
+                    </li>
+                    {% if products.has_next %}
+                    <li class="page-item"><a class="page-link" href="?page={{ products.next_page_number }}">Next</a>
+                    </li>
+                    {% endif %}
+                </ul>
+                </nav>
+            </div>
+        </dvi>
+    </div>
+</body>
+{% endblock %}
+
+</html>

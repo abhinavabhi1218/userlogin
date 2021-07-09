@@ -1,0 +1,27 @@
+body {
+    background-color: lightcyan;
+}
+
+.container {
+    padding-top: 50px;
+    padding-left: 50px;
+}
+
+.card-img-top {
+    height: 10ch;
+    width: auto;
+}
+
+.card-text {
+    color: green;
+    font-weight: 700;
+}
+
+.card-title {
+    font-weight: 900;
+}
+
+.jumbotron {
+    color: blue;
+    background-color: mediumaquamarine;
+}

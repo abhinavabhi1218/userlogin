@@ -1,0 +1,21 @@
+{% extends "dongo/navbar.html" %} {% load static%} {% block title %}
+<title>storeing</title>{% endblock title %} {% block content %}
+<link rel="stylesheet" href="{% static 'dongo/style.css' %}">
+<div class='container'>
+    <div class='row-sm'>
+        <h3>Enter the products here</h4>
+    </div>
+    <div class="row">
+        <form action="" method="post" novalidate>{% csrf_token %} {% for fm in form %}
+            <div class="row">
+                <div class="col-sm-2">{{fm.label_tag}}</div>
+                {{fm}}
+                <p style="color:red;">{{fm.errors|striptags}}</p>
+            </div>
+            <br> {% endfor %}
+            <button class=" btn btn-success btn-bg " type=" submit ">updte</button>
+            <a href="{% url 'home' %}" class="btn btn-primary">home</a>
+    </div>
+    </form>
+</div>
+</div> {% endblock %}

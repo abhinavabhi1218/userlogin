@@ -1,0 +1,17 @@
+{% extends "dongo/navbar.html" %} {% load static%} {% block title %}
+<title>signup</title>{% endblock title %} {% block content %}
+<link rel="stylesheet" href="{% static 'dongo/style.css' %}">
+<div class='container'>
+    <div class="row">
+        <div class="col-sm-6">
+            <form action="" method="post" novalidate>{% csrf_token %} 
+            {% for fm in form %} 
+            {{fm.label_tag}} {{fm}} <p style="color:red;">{{fm.errors|striptags}}</p>
+                <br> {% endfor %} <button class=" btn btn-success btn-bg " type=" submit ">log-in</button>
+                <a href="{% url 'signup' %}" class="btn btn-primary btn-bg">sign-up</a>
+        </div>
+        </form>
+    </div>
+</div>
+
+</div> {% endblock %}
